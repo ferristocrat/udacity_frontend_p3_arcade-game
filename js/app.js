@@ -65,6 +65,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Controlling the movement of the player
 Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
@@ -90,17 +91,9 @@ Player.prototype.handleInput = function(key) {
     }
 }
 
-gem = function() {
-    var randNum = Math.floor(Math.random() * (3)) + 1;
-    if (randNum = 1) {
-        return 'images/gem-blue.png'
-    } else if (randNum = 2) {
-        return 'images/gem-green.png'
-    } else {
-        return 'images/gem-orange.png'
-    };
-};
-
+// Function that randomly returns one of three gem images
+// Assigns the returned image to the sprite
+// Defines the position of the sprite
 var Gem = function(x, y) {
     var randNum = Math.floor(Math.random() * (3)) + 1;
     if (randNum == 1) {
@@ -117,6 +110,7 @@ var Gem = function(x, y) {
 
 var score = 0;
 
+// Function for updating game each time player collects gem
 Gem.prototype.update = function() {
 
     // Player moves back to start if he collects a gem
@@ -130,8 +124,13 @@ Gem.prototype.update = function() {
             gem.render();
         });
 
+        // This moves the gem off the canvas
         this.x = -100000
+        //score is incremented by 1 each time gem collected
         score ++;
+
+        // global reset function is called
+        // reset() is defined in engine.js
         if (score > 4) {
             reset();
         };
@@ -144,9 +143,7 @@ Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 50, 85);
 };
 
-// Now instantiate your objects.
-
-
+// Now instantiate your objects
 
 var enemy1 = new Enemy (-250, 58, Math.random()+(Math.floor(Math.random() * 2)));
 var enemy2 = new Enemy (-250, 142, Math.random()+(Math.floor(Math.random() * 2)));
@@ -158,7 +155,7 @@ var gem3 = new Gem (227, 35);
 var gem4 = new Gem (328, 35);
 var gem5 = new Gem (429, 35);
 
-// Place all enemy objects in an array called allEnemies
+// Place all enemy and gem objects into arrays
 
 allEnemies = [enemy1, enemy2, enemy3];
 allGems = [gem1, gem2, gem3, gem4, gem5];
